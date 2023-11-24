@@ -1,5 +1,11 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
+export enum Priority {
+  HIGH = 'high',
+  MEDIUM = 'medium',
+  LOW = 'low',
+}
+
 @Entity('TodoItem')
 export class TodoItem {
   @PrimaryGeneratedColumn()
@@ -11,8 +17,8 @@ export class TodoItem {
   @Column({ type: 'date' })
   due_date: Date;
 
-  @Column({ length: 6 })
-  priority: string;
+  @Column({ type: 'enum', enum: Priority, default: Priority.MEDIUM })
+  priority: Priority;
 
   @Column({ type: 'boolean' })
   completed: boolean;
